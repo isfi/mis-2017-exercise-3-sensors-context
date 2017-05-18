@@ -10,43 +10,42 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-public class acc_view extends View {
-        private final int paintColor = Color.BLACK;
+public class AccView extends View {
         private Paint drawWhite, drawRed, drawBlue, drawGreen;
         private Paint drawRec;
 
-        //public int progress = 0;
-        public int samplesize = 50;
-        float prevx, currx;
-        float prevyW, curryW, prevyR, curryR, prevyB,  curryB, prevyG,  curryG;
+        public int sampleSize = 50;
 
-        int RecWidth, RecHeight;
-        List<String> Acc_X = new ArrayList<String>();
-        List<String> Acc_Y = new ArrayList<String>();
-        List<String> Acc_Z = new ArrayList<String>();
-        List<String> Acc_Mag = new ArrayList<String>();
+        public int
+                recWidth,
+                recHeight;
 
-        public acc_view(Context context){
+        List<Double> Acc_X = new ArrayList<Double>();
+        List<Double> Acc_Y = new ArrayList<Double>();
+        List<Double> Acc_Z = new ArrayList<Double>();
+        List<Double> Acc_Mag = new ArrayList<Double>();
+
+        public AccView(Context context){
             super(context);
         }
 
-        public acc_view(Context context, AttributeSet attrs) {
+        public AccView(Context context, AttributeSet attrs) {
             super(context, attrs);
             setFocusable(true);
             setFocusableInTouchMode(true);
             setupPaint();
         }
 
-        public acc_view(Context context, AttributeSet attrs, int defStyle) {
+        public AccView(Context context, AttributeSet attrs, int defStyle) {
             super(context, attrs, defStyle);
         }
 
         // from https://guides.codepath.com/android/Basic-Painting-with-Views
         private void setupPaint() {
-            Acc_X.add("0");
-            Acc_Y.add("0");
-            Acc_Z.add("0");
-            Acc_Mag.add("0");
+            Acc_X.add(0.0);
+            Acc_Y.add(0.0);
+            Acc_Z.add(0.0);
+            Acc_Mag.add(0.0);
 
             drawWhite = new Paint();
             drawWhite.setColor(Color.WHITE);
@@ -87,65 +86,63 @@ public class acc_view extends View {
             drawRec.setStrokeJoin(Paint.Join.ROUND);
             drawRec.setStrokeCap(Paint.Cap.ROUND);
 
-            RecWidth = 500;
-            RecHeight = 300;
+            recWidth = 500;
+            recHeight = 300;
 
         }
 
         @Override
         protected void onDraw(Canvas canvas) {
 
-            canvas.drawRect(0, 0, RecWidth, RecHeight, drawRec);
+            canvas.drawRect(0, 0, recWidth, recHeight, drawRec);
 
-            if (Acc_X.size() >= samplesize) {
+            while (Acc_X.size() > sampleSize) {
                 Acc_X.remove(0);
             }
 
-            if (Acc_Y.size() >= samplesize) {
+            while (Acc_Y.size() > sampleSize) {
                 Acc_Y.remove(0);
             }
 
-            if (Acc_Z.size() >= samplesize) {
+            while (Acc_Z.size() > sampleSize) {
                 Acc_Z.remove(0);
             }
 
-            if (Acc_Mag.size() >= samplesize) {
+            while (Acc_Mag.size() > sampleSize) {
                 Acc_Mag.remove(0);
             }
 
-                prevx = 0;
-                String temp = Acc_X.get(0);
-                prevyR = Float.valueOf(temp); //RED = X
-                 temp = Acc_Y.get(0);
-                prevyG = Float.valueOf(temp);//GREEN = Y
-                temp = Acc_Z.get(0);
-                prevyB = Float.valueOf(temp);// BLUE = Z
-                temp = Acc_Mag.get(0);
-                prevyW = Float.valueOf(temp);// WHITE = MAG
-
+            float prevX = 0,
+                prevYR = Acc_X.get(0).floatValue(), //RED = X
+                prevYG = Acc_Y.get(0).floatValue(), //GREEN = Y
+                prevYB = Acc_Z.get(0).floatValue(), //BLUE = Z
+                prevYW = Acc_Mag.get(0).floatValue(), //WHITE = Mag
+                halfHeight = (float)recHeight / 2,
+                stepSize = (float)recWidth / sampleSize,
+                currX = 0,
+                currYR = 0,
+                currYG = 0,
+                currYB = 0,
+                currYW = 0;
 
                 for (int i =0; i <(Acc_X.size()); i++) {
-                    currx= (RecWidth / samplesize)*i;
+                    currX = stepSize * i;
 
-                    String temp2 = Acc_X.get(i);
-                    curryR= (RecHeight/2) - Float.valueOf(temp2);
-                     temp2 = Acc_Y.get(i);
-                    curryG= (RecHeight/2) - Float.valueOf(temp2);
-                     temp2 = Acc_Z.get(i);
-                    curryB= (RecHeight/2) - Float.valueOf(temp2);
-                     temp2 = Acc_Mag.get(i);
-                    curryW= (RecHeight/2) - Float.valueOf(temp2);
+                    currYR = halfHeight - Acc_X.get(i).floatValue();
+                    currYG = halfHeight - Acc_Y.get(i).floatValue();
+                    currYB = halfHeight - Acc_Z.get(i).floatValue();
+                    currYW = halfHeight - Acc_Mag.get(i).floatValue();
 
-                    canvas.drawLine(prevx, prevyR, currx, curryR, drawRed);
-                    canvas.drawLine(prevx, prevyG, currx, curryG, drawGreen);
-                    canvas.drawLine(prevx, prevyB, currx, curryB, drawBlue);
-                    canvas.drawLine(prevx, prevyW, currx, curryW, drawWhite);
+                    canvas.drawLine(prevX, prevYR, currX, currYR, drawRed);
+                    canvas.drawLine(prevX, prevYG, currX, currYG, drawGreen);
+                    canvas.drawLine(prevX, prevYB, currX, currYB, drawBlue);
+                    canvas.drawLine(prevX, prevYW, currX, currYW, drawWhite);
 
-                    prevx = currx;
-                    prevyR = curryR;
-                    prevyG = curryG;
-                    prevyB = curryB;
-                    prevyW = curryW;
+                    prevX = currX;
+                    prevYR = currYR;
+                    prevYG = currYG;
+                    prevYB = currYB;
+                    prevYW = currYW;
                 }
 
 

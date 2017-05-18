@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <declare-styleable name="acc_view">
+        <declare-styleable name="AccView">
             <attr name="exampleString" format="string" />
             <attr name="exampleDimension" format="dimension" />
             <attr name="exampleColor" format="color" />
             <attr name="exampleDrawable" format="color|reference" />
         </declare-styleable>
-    <declare-styleable name="fft_view">
+    <declare-styleable name="FFTView">
         <attr name="exampleString2" format="string" />
         <attr name="exampleDimension2" format="dimension" />
         <attr name="exampleColor2" format="color" />

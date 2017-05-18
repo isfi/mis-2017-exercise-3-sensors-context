@@ -14,27 +14,25 @@
         android:id="@+id/TextView"
         android:layout_width="298dp"
         android:layout_height="31dp"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
+        android:layout_marginBottom="40dp"
+        android:text="Sample size: 50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.76" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="298dp"
         android:layout_height="31dp"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
+        android:text="FFT Window size factor: 1.0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.983" />
+        app:layout_constraintVertical_bias="0.813" />
 
     <SeekBar
         android:id="@+id/seekBar1"
@@ -47,8 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView"
-        app:layout_constraintVertical_bias="0.072" />
+        android:layout_marginBottom="16dp" />
 
     <SeekBar
         android:id="@+id/seekBar2"
@@ -61,21 +58,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView"
-        app:layout_constraintVertical_bias="0.377" />
+        android:layout_marginBottom="73dp" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="351dp"
-        android:layout_height="342dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="354dp"
+        android:layout_height="338dp"
+        android:layout_marginTop="46dp"
         android:orientation="horizontal"
-        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.pavus.assignment03.acc_view
+        <com.example.pavus.assignment03.AccView
             android:id="@+id/acc_view"
             android:layout_width="278dp"
             android:layout_height="159dp"
@@ -90,7 +85,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.02" />
 
-        <com.example.pavus.assignment03.fft_view
+        <com.example.pavus.assignment03.FFTView
             android:id="@+id/fft_view"
             android:layout_width="277dp"
             android:layout_height="160dp"
@@ -105,6 +100,14 @@
             app:layout_constraintVertical_bias="0.914" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/goRunning"
+        android:layout_width="368dp"
+        android:layout_height="45dp"
+        android:text="Go Running!"
+        tools:layout_editor_absoluteY="1dp"
+        tools:layout_editor_absoluteX="8dp" />
 
 
 </android.support.constraint.ConstraintLayout>
